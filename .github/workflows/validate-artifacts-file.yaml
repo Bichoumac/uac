@@ -1,15 +1,21 @@
 name: Validate Artifacts File
 
 on:
-  pull_request:
-    types:
-      - opened
-      - reopened
-    paths:
-      - 'artifacts/**'
+  push:
     branches:
       - develop
-      - 'release/**'
+      - main
+      - 'releases/**'
+    paths:
+      - 'artifacts/**'
+
+  pull_request:
+    branches:
+      - develop
+      - main
+      - 'releases/**'
+    paths:
+      - 'artifacts/**'
 
 jobs:
   validate-artifacts-file:
@@ -33,5 +39,3 @@ jobs:
               ./uac --validate-artifacts-file "$file"
             fi
           done
-
-      
